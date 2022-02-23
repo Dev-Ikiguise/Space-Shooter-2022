@@ -12,11 +12,11 @@ public class PlayerShip : Ship
 
     void HandleInput()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetKey("left shift"))
         {
             Thrust();
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("e"))
         {
             FireProjectile();
         }

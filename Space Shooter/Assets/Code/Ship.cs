@@ -66,6 +66,7 @@ public class Ship : MonoBehaviour
     public void Explode()
     {
         //TODO Create explosion particles
+        ScreenShaker.Instance.ShakeScreen();
         Instantiate(Resources.Load("Explosion"), transform.position, transform.rotation);
         Destroy(gameObject);
         
