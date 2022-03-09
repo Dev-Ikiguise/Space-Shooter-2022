@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShip : Ship
 {
+
     void Update()
     {
         FollowMouse();
@@ -18,7 +19,8 @@ public class PlayerShip : Ship
         }
         if (Input.GetKeyDown("e"))
         {
-            FireProjectile();
+            FireProjectile1();
+            FireProjectile2();
         }
     }
     void FollowMouse()
