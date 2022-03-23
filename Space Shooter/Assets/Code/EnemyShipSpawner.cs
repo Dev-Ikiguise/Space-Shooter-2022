@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyShipSpawner : MonoBehaviour
 {
+    public static EnemyShipSpawner Instance;
+
     public List<EnemyShip> enemyShipPrefabs;
     public Transform spawnPoint;
     public Transform spawnPivot;
@@ -13,6 +15,8 @@ public class EnemyShipSpawner : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         currentWave = 1;
         HUD.Instance.DisplayWave(currentWave);
 

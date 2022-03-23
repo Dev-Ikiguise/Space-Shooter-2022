@@ -23,6 +23,9 @@ public class Ship : MonoBehaviour
 
     [HideInInspector] ParticleSystem thrustParticles;
 
+    public AudioSource fireSound;
+    public AudioSource getHitSound;
+
     private void Awake()
     {
         currentArmor = maxArmor;
@@ -50,6 +53,8 @@ public class Ship : MonoBehaviour
         projectile.GetComponent<Projectile>().GetFired(gameObject);
         Destroy(projectile, 4);
         StartCoroutine(FireRateBuffer());
+
+        fireSound.Play();
     }
 
     public void FireProjectile1()
@@ -59,6 +64,8 @@ public class Ship : MonoBehaviour
         projectile.GetComponent<Projectile>().GetFired(gameObject);
         Destroy(projectile, 4);
         StartCoroutine(FireRateBuffer());
+
+        fireSound.Play();
     }
 
     public void FireProjectile2()
@@ -68,6 +75,7 @@ public class Ship : MonoBehaviour
         projectile.GetComponent<Projectile>().GetFired(gameObject);
         Destroy(projectile, 4);
         StartCoroutine(FireRateBuffer());
+
     }
 
     private IEnumerator FireRateBuffer()
@@ -90,6 +98,8 @@ public class Ship : MonoBehaviour
         {
             HUD.Instance.DisplayHealth(currentArmor, maxArmor);
         }
+
+        getHitSound.Play();
     }
 
     public void Explode()
@@ -97,6 +107,12 @@ public class Ship : MonoBehaviour
         //TODO Create explosion particles
         ScreenShaker.Instance.ShakeScreen();
         Instantiate(Resources.Load("Explosion"), transform.position, transform.rotation);
+
+        if(GetComponent<PlayerShip>())
+        {
+            SessionManager.Instance.HandlePlayerDestroyed();
+        }
+
         Destroy(gameObject);
 
         FindObjectOfType<EnemyShipSpawner>().CountEnemyShips();
